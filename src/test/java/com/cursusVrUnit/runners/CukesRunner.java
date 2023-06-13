@@ -8,7 +8,7 @@ import org.junit.runner.RunWith;
 @CucumberOptions(
         plugin = {"json:target/cucumber.json"},
         features = "src/test/resources/features",
-        glue = "com/cursusVrUnit/stepdefiniations",
+        glue = "com/cursusVrUnit/stepdefinitions",
         //dryRun = true, //oldugunda sadece eksik senaryoyu calistiriyor.
         dryRun = false// oldugunda bütün senaryoyu calistiriyor. Default
         //,tags = "@wip"

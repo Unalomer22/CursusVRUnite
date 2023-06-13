@@ -1,17 +1,16 @@
-package com.cursusVrUnit.stepdefiniations;
+package com.cursusVrUnit.stepdefinitions;
 
 import com.cursusVrUnit.pages.PasswordPage;
 import com.cursusVrUnit.utilities.BrowserUtils;
 import com.cursusVrUnit.utilities.ConfigurationReader;
 import com.github.javafaker.Faker;
 import io.cucumber.java.en.And;
-import org.openqa.selenium.remote.Browser;
 
 public class ChangePasswordStepDefinition {
 
     Faker faker = new Faker();
 
-    String password = faker.internet().password(9, 15, true, false, true);
+    String password = faker.internet().password(8, 15, true, false, true);
 
     PasswordPage passwordPage = new PasswordPage();
 
