@@ -1,4 +1,4 @@
-package com.cursusVrUnit.stepdefiniations;
+package com.cursusVrUnit.stepdefinitions;
 
 import com.cursusVrUnit.pages.BasePage;
 import com.cursusVrUnit.pages.LoginPage;
