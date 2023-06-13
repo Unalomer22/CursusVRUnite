@@ -16,4 +16,7 @@ public class LoginPage extends BasePage{
 
     @FindBy(xpath = "//a[text()='Forgot Password']")
     public WebElement forgotPassword;
+
+    @FindBy(xpath = "//span[@class='text-danger']")
+    public WebElement logInPageErrorMessage;
 }
