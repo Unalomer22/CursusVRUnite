@@ -6,6 +6,8 @@ import com.cursusVrUnit.utilities.ConfigurationReader;
 import com.cursusVrUnit.utilities.Driver;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
+import org.junit.Assert;
 
 public class LoginStepDefinition {
 
@@ -35,5 +37,10 @@ public class LoginStepDefinition {
     @And("Login sayfasindaki login butonuna tiklanir")
     public void loginSayfasindakiLoginButonunaTiklanir() {
         loginPage.loginButton.click();
+    }
+
+    @Then("Login sayfasinda sistemin hata verdigi {string} dogrulanir")
+    public void loginSayfasindaSisteminHataVerdigiDogrulanir(String errorMessage) {
+        Assert.assertEquals(ConfigurationReader.getProperty(errorMessage), loginPage.logInPageErrorMessage.getText());
     }
 }
