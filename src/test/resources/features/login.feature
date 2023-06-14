@@ -1,4 +1,4 @@
-Feature: Login
+gFeature: Login
 
   Scenario: Login with valid username and password
     Given Cursus Ana Sayfasina gidilir
