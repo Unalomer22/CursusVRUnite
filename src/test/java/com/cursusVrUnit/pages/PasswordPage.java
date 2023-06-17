@@ -4,6 +4,8 @@ import com.fasterxml.jackson.databind.ser.Serializers;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import java.util.List;
+
 public class PasswordPage extends BasePage {
 
     @FindBy(id = "id_old_password")
@@ -17,4 +19,10 @@ public class PasswordPage extends BasePage {
 
     @FindBy(xpath = "//button[@type='submit']")
     public WebElement saveButton;
+
+    @FindBy(xpath = "//span[@class='text-danger']")
+    public List<WebElement> sifreGuncellemeMesajiList;
+
+    @FindBy(xpath = "//span[@class='text-danger']")
+    public WebElement sifreGuncellemeMesaji;
 }

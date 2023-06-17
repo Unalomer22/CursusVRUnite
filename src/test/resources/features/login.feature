@@ -1,4 +1,5 @@
-gFeature: Login
+@wip
+Feature: Login
 
   Scenario: Login with valid username and password
     Given Cursus Ana Sayfasina gidilir
@@ -6,6 +7,7 @@ gFeature: Login
     And "username01" username girilir
     And "password01" sifre girilir
     And Login sayfasindaki login butonuna tiklanir
+    Then Sisteme login yapildigi dogrulanir
 #    And Driver kapatilir
 
 
