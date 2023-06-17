@@ -1,3 +1,4 @@
+@wip
 Feature: Login
 
   Scenario: Login with valid username and password
@@ -6,6 +7,7 @@ Feature: Login
     And "username01" username girilir
     And "password01" sifre girilir
     And Login sayfasindaki login butonuna tiklanir
+    Then Sisteme login yapildigi dogrulanir
 #    And Driver kapatilir
 
 

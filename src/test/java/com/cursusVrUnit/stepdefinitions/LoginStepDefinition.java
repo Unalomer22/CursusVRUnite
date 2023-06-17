@@ -2,6 +2,7 @@ package com.cursusVrUnit.stepdefinitions;
 
 import com.cursusVrUnit.pages.BasePage;
 import com.cursusVrUnit.pages.LoginPage;
+import com.cursusVrUnit.pages.UserPage;
 import com.cursusVrUnit.utilities.ConfigurationReader;
 import com.cursusVrUnit.utilities.Driver;
 import io.cucumber.java.en.And;
@@ -13,6 +14,8 @@ public class LoginStepDefinition {
 
     BasePage basePage = new BasePage();
     LoginPage loginPage = new LoginPage();
+
+    UserPage userPage = new UserPage();
 
     @Given("Cursus Ana Sayfasina gidilir")
     public void cursusAnaSayfasinaGidilir() {
@@ -43,4 +46,20 @@ public class LoginStepDefinition {
     public void loginSayfasindaSisteminHataVerdigiDogrulanir(String errorMessage) {
         Assert.assertEquals(ConfigurationReader.getProperty(errorMessage), loginPage.logInPageErrorMessage.getText());
     }
+
+    public void logIn(){
+        cursusAnaSayfasinaGidilir();
+        anaSayfadakiLoginButonunaTiklanir();
+        usernameGirilir("username01");
+        sifreGirilir("password01");
+        loginSayfasindakiLoginButonunaTiklanir();
+        sistemeLoginYapildigiDogrulanir();
+    }
+
+    @Then("Sisteme login yapildigi dogrulanir")
+    public void sistemeLoginYapildigiDogrulanir() {
+        Assert.assertTrue(userPage.kullaniciIconu.isDisplayed());
+    }
+
+
 }
