@@ -1,12 +1,11 @@
 Feature: User Functionalities
 
-#  Background:Kullanicinin daha oncesinden sisteme giris yapmis olmasi
-#    Given Cursus Ana Sayfasina gidilir
-#    And Ana sayfadaki login butonuna tiklanir
-#    And "username01" username girilir
-#    And "password01" sifre girilir
-#    And Login sayfasindaki login butonuna tiklanir
-
+  Background:Kullanicinin daha oncesinden sisteme giris yapmis olmasi
+    Given Cursus Ana Sayfasina gidilir
+    And Ana sayfadaki login butonuna tiklanir
+    And "username01" username girilir
+    And "password01" sifre girilir
+    And Login sayfasindaki login butonuna tiklanir
 
   Scenario: Kullanici sistemden cikis yapabilir Cursus tabindan
     And Cursus goruntusune tiklanir
