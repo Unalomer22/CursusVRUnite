@@ -45,3 +45,12 @@ Feature: Client Functionality
     And Sayfanin altinda bulunan "Previous" butonuna tiklanir
     Then Sayfanin bir mevcut sayfadan bir onceki sayfaya gectigi gozlemlenir
 
+  Scenario: Liste 10’ar kayitlik sayfalar halinde sayfalandirilir. Sayfalarda ileri-geri yada secilen ozel bir sayfaya gidilebilir.(Ozel Sayfa Button)
+    And Sayfanin altinda bulunan "2" butonuna tiklanir
+    Then Sayfanin "2".ci sayfada oldugu dogrulanir
+
+    Scenario: Yeni kayit olusturulabilir(Client)
+      And Create New Client butonuna tiklanir
+      And Gerekli valid Client bilgileri girilir
+      And Client sayfasindaki Save Changes butonuna tiklanir
+      Then Olusturulan clientin verileri listeden dogrulanir
