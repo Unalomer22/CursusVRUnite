@@ -25,15 +25,15 @@ public class ClientsStepDefinitions {
     int expectedSayfa = 1;
     int actualSayfaPrevious;
 
-    String clientName;
-    String clientBSNNumber;
-    String clientAddress;
-    String clientPostCode;
-    String clientCountry;
-    String clientPersonalName;
-    String clientPhoneNumber;
-    String clientEmail;
-    String clientExpireDate;
+    String clientName = faker.name().fullName();
+    String clientBSNNumber = faker.number().digits(23);
+    String clientAddress = faker.address().city();
+    String clientPostCode = faker.address().zipCode();
+    String clientCountry = faker.address().country();
+    String clientPersonalName = faker.name().fullName();
+    String clientPhoneNumber = faker.phoneNumber().cellPhone();
+    String clientEmail = faker.internet().emailAddress();
+    String clientExpireDate = "2023-08-05";
 
     @And("Clients tabindaki arama kutusuna {string} musterisinin bilgisi yazilir")
     public void clientsTabindakiAramaKutusunaMusterisininIsmiYazilir(String arananMusteriBilgisi) {
@@ -130,15 +130,6 @@ public class ClientsStepDefinitions {
 
     @And("Gerekli valid Client bilgileri girilir")
     public void gerekliValidClientBilgileriGirilir() {
-        clientName = faker.name().fullName();
-        clientBSNNumber = faker.number().digits(23);
-        clientAddress = faker.address().city();
-        clientPostCode = faker.address().zipCode();
-        clientCountry = faker.address().country();
-        clientPersonalName = faker.name().fullName();
-        clientPhoneNumber = faker.phoneNumber().cellPhone();
-        clientEmail = faker.internet().emailAddress();
-        clientExpireDate = "2023-08-05";
 
         expectedClientDatas.add(clientName);
         expectedClientDatas.add(clientBSNNumber);
@@ -186,6 +177,91 @@ public class ClientsStepDefinitions {
     public void olusturulanClientinVerileriListedenDogrulanir() {
         for (int i = 0; i < 5; i++){
             Assert.assertEquals(expectedClientDatas.get(i),clientsPage.firstClientsDatas.get(i).getText());
+        }
+    }
+
+    @And("New Client Name girilir")
+    public void newClientNameGirilir() {
+        clientsPage.clientNameTextBox.sendKeys(clientName);
+    }
+
+    @And("New Client BSN numarasi girilir")
+    public void newClientBSNNumarasiGirilir() {
+        clientsPage.boxSerialNumber.sendKeys(clientBSNNumber);
+    }
+
+    @And("New client Adress girilir")
+    public void newClientAdressGirilir() {
+        clientsPage.addressTextBox.sendKeys(clientAddress);
+    }
+
+    @And("New Client Post Code girilir")
+    public void newClientPostCodeGirilir() {
+        clientsPage.postCodeTextBox.sendKeys(clientPostCode);
+    }
+
+    @And("New Client Country girilir")
+    public void newClientCountryGirilir() {
+        clientsPage.countryTextBox.sendKeys(clientCountry);
+    }
+
+    @And("New Client Personel Name girilir")
+    public void newClientPersonelNameGirilir() {
+        clientsPage.personalNameTextBox.sendKeys(clientPersonalName);
+    }
+
+    @And("New Client Phone Number girilir")
+    public void newClientPhoneNumberGirilir() {
+        clientsPage.phoneTextBox.sendKeys(clientPhoneNumber);
+    }
+
+    @And("New Client Email girilir")
+    public void newClientEmailGirilir() {
+        clientsPage.emailTextBox.sendKeys(clientEmail);
+    }
+
+    @And("New Client Expire Date girilir")
+    public void newClientExpireDateGirilir() {
+        clientsPage.expireDate.sendKeys(clientExpireDate);
+        BrowserUtils.waitFor(1);
+        Driver.getDriver().findElement(By.xpath("//html")).click();
+        BrowserUtils.waitFor(1);
+    }
+
+    @Then("{string} Text boxinin altinda hata mesajinin gorundugu dogrulanir")
+    public void textBoxininAltindaMesajininGorunduguDogrulanir(String textBox) {
+        String expectedErrorMessage = "This field is required.";
+        switch (textBox){
+            case "name":
+                Assert.assertEquals(expectedErrorMessage, clientsPage.nameErrorMessage.getText());
+                break;
+            case "bsn":
+                Assert.assertEquals(expectedErrorMessage, clientsPage.bsnErrorMessage.getText());
+                break;
+            case "address":
+                Assert.assertEquals(expectedErrorMessage, clientsPage.addressErrorMessage.getText());
+                break;
+            case "post code":
+                Assert.assertEquals(expectedErrorMessage, clientsPage.postCodeErrorMessage.getText());
+                break;
+            case "country":
+                Assert.assertEquals(expectedErrorMessage, clientsPage.countryErrorMessage.getText());
+                break;
+            case "personal name":
+                Assert.assertEquals(expectedErrorMessage, clientsPage.personalNameErrorMessage.getText());
+                break;
+            case "phone number":
+                Assert.assertEquals(expectedErrorMessage, clientsPage.phoneErrorMessage.getText());
+                break;
+            case "email":
+                Assert.assertEquals(expectedErrorMessage, clientsPage.emailErrorMessage.getText());
+                break;
+            case "expire date":
+                Assert.assertEquals(expectedErrorMessage, clientsPage.expireDateErrorMessage.getText());
+                break;
+            default:
+                System.out.println("Yanlis girdi yapilmistir");
+                break;
         }
     }
 }

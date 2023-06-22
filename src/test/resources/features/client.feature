@@ -49,8 +49,125 @@ Feature: Client Functionality
     And Sayfanin altinda bulunan "2" butonuna tiklanir
     Then Sayfanin "2".ci sayfada oldugu dogrulanir
 
-    Scenario: Yeni kayit olusturulabilir(Client)
-      And Create New Client butonuna tiklanir
-      And Gerekli valid Client bilgileri girilir
-      And Client sayfasindaki Save Changes butonuna tiklanir
-      Then Olusturulan clientin verileri listeden dogrulanir
+  Scenario: Yeni kayit olusturulabilir(Client)
+    And Create New Client butonuna tiklanir
+    And Gerekli valid Client bilgileri girilir
+    And Client sayfasindaki Save Changes butonuna tiklanir
+    Then Olusturulan clientin verileri listeden dogrulanir
+
+  Scenario: Eksik girdi ile yeni kayit olusturulamamalidir.(Isim eksik)
+    And Create New Client butonuna tiklanir
+    And New Client BSN numarasi girilir
+    And New client Adress girilir
+    And New Client Post Code girilir
+    And New Client Country girilir
+    And New Client Personel Name girilir
+    And New Client Phone Number girilir
+    And New Client Email girilir
+    And New Client Expire Date girilir
+    And Client sayfasindaki Save Changes butonuna tiklanir
+    Then "name" Text boxinin altinda hata mesajinin gorundugu dogrulanir
+
+  Scenario: Eksik girdi ile yeni kayit olusturulamamalidir.(BSN  eksik)
+    And Create New Client butonuna tiklanir
+    And New Client Name girilir
+    And New client Adress girilir
+    And New Client Post Code girilir
+    And New Client Country girilir
+    And New Client Personel Name girilir
+    And New Client Phone Number girilir
+    And New Client Email girilir
+    And New Client Expire Date girilir
+    And Client sayfasindaki Save Changes butonuna tiklanir
+    Then "bsn" Text boxinin altinda hata mesajinin gorundugu dogrulanir
+
+  Scenario: Eksik girdi ile yeni kayit olusturulamamalidir.(Adress eksik)
+    And Create New Client butonuna tiklanir
+    And New Client Name girilir
+    And New Client BSN numarasi girilir
+    And New Client Post Code girilir
+    And New Client Country girilir
+    And New Client Personel Name girilir
+    And New Client Phone Number girilir
+    And New Client Email girilir
+    And New Client Expire Date girilir
+    And Client sayfasindaki Save Changes butonuna tiklanir
+    Then "address" Text boxinin altinda hata mesajinin gorundugu dogrulanir
+
+  Scenario: Eksik girdi ile yeni kayit olusturulamamalidir.(Post Code eksik)
+    And Create New Client butonuna tiklanir
+    And New Client Name girilir
+    And New Client BSN numarasi girilir
+    And New client Adress girilir
+    And New Client Country girilir
+    And New Client Personel Name girilir
+    And New Client Phone Number girilir
+    And New Client Email girilir
+    And New Client Expire Date girilir
+    And Client sayfasindaki Save Changes butonuna tiklanir
+    Then "post code" Text boxinin altinda hata mesajinin gorundugu dogrulanir
+
+  Scenario: Eksik girdi ile yeni kayit olusturulamamalidir.(Country eksik)
+    And Create New Client butonuna tiklanir
+    And New Client Name girilir
+    And New Client BSN numarasi girilir
+    And New client Adress girilir
+    And New Client Post Code girilir
+    And New Client Personel Name girilir
+    And New Client Phone Number girilir
+    And New Client Email girilir
+    And New Client Expire Date girilir
+    And Client sayfasindaki Save Changes butonuna tiklanir
+    Then "country" Text boxinin altinda hata mesajinin gorundugu dogrulanir
+
+  Scenario: Eksik girdi ile yeni kayit olusturulamamalidir.(Personel Name eksik)
+    And Create New Client butonuna tiklanir
+    And New Client Name girilir
+    And New Client BSN numarasi girilir
+    And New client Adress girilir
+    And New Client Post Code girilir
+    And New Client Country girilir
+    And New Client Phone Number girilir
+    And New Client Email girilir
+    And New Client Expire Date girilir
+    And Client sayfasindaki Save Changes butonuna tiklanir
+    Then "personal name" Text boxinin altinda hata mesajinin gorundugu dogrulanir
+
+  Scenario: Eksik girdi ile yeni kayit olusturulamamalidir.(Phone Number eksik)
+    And Create New Client butonuna tiklanir
+    And New Client Name girilir
+    And New Client BSN numarasi girilir
+    And New client Adress girilir
+    And New Client Post Code girilir
+    And New Client Country girilir
+    And New Client Personel Name girilir
+    And New Client Email girilir
+    And New Client Expire Date girilir
+    And Client sayfasindaki Save Changes butonuna tiklanir
+    Then "phone number" Text boxinin altinda hata mesajinin gorundugu dogrulanir
+
+  Scenario: Eksik girdi ile yeni kayit olusturulamamalidir.(Email eksik)
+    And Create New Client butonuna tiklanir
+    And New Client Name girilir
+    And New Client BSN numarasi girilir
+    And New client Adress girilir
+    And New Client Post Code girilir
+    And New Client Country girilir
+    And New Client Personel Name girilir
+    And New Client Phone Number girilir
+    And New Client Expire Date girilir
+    And Client sayfasindaki Save Changes butonuna tiklanir
+    Then "email" Text boxinin altinda hata mesajinin gorundugu dogrulanir
+
+  Scenario: Eksik girdi ile yeni kayit olusturulamamalidir.(Expire Date eksik)
+    And Create New Client butonuna tiklanir
+    And New Client Name girilir
+    And New Client BSN numarasi girilir
+    And New client Adress girilir
+    And New Client Post Code girilir
+    And New Client Country girilir
+    And New Client Personel Name girilir
+    And New Client Phone Number girilir
+    And New Client Email girilir
+    And Client sayfasindaki Save Changes butonuna tiklanir
+    Then "expire date" Text boxinin altinda hata mesajinin gorundugu dogrulanir
