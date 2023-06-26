@@ -13,28 +13,18 @@ Feature: User Functionalities
     And Sign Out butonuna tiklanir
     Then Sistemden cikis yapildigi dogrulanir
 
-  Scenario: Kullanici sistemden cikis yapabilir Dashboard tabindan
-    And "Dashboard" sayfasi acilir
+  Scenario Outline: Kullanici sistemden cikis yapabilir Dashboard, Clients, Videos ve Headsets tabindan
+    And "<tabs>" sayfasi acilir
     And Sag ustte bulunan kullanici ikonuna tiklanir
     And Sign Out butonuna tiklanir
     Then Sistemden cikis yapildigi dogrulanir
+    Examples: Tablar
+      | tabs      |
+      | Dashboard |
+      | Clients   |
+      | Videos    |
+      | Headsets  |
 
-  Scenario: Kullanici sistemden cikis yapabilir Clients tabindan
-    And "Clients" sayfasi acilir
-    And Sag ustte bulunan kullanici ikonuna tiklanir
-    And Sign Out butonuna tiklanir
-    Then Sistemden cikis yapildigi dogrulanir
-
-  Scenario: Kullanici sistemden cikis yapabilir Videos tabindan
-    And "Videos" sayfasi acilir
-    And Sag ustte bulunan kullanici ikonuna tiklanir
-    And Sign Out butonuna tiklanir
-    Then Sistemden cikis yapildigi dogrulanir
-
-  Scenario: Kullanici sistemden cikis yapabilir Headsets tabindan
-    And "Headsets" sayfasi acilir
-    And Sag ustte bulunan kullanici ikonuna tiklanir
-    And Sign Out butonuna tiklanir
 
   Scenario: Kullanici sifresini gecerli bir sifre ile degistirebilir
     And Sag ustte bulunan kullanici ikonuna tiklanir
