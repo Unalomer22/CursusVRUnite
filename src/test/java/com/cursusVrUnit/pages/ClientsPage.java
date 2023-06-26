@@ -80,5 +80,14 @@ public class ClientsPage extends BasePage {
     @FindBy(xpath = "((//div[@class='ui search focus mt-30 lbel25'])[8]//div)[2]")
     public WebElement expireDateErrorMessage;
 
+    @FindBy(xpath = "(//i[@class='uil uil-edit-alt'])[1]")
+    public WebElement firstClientsEditButton;
+
+    @FindBy(xpath = "//button[@class='swal2-confirm swal2-styled swal2-default-outline']")
+    public WebElement yesDeleteItButton;
+
+    @FindBy(xpath = "//button[@class='swal2-cancel swal2-styled swal2-default-outline']")
+    public WebElement cancelButton;
+
 
 }

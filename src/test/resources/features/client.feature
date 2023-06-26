@@ -171,3 +171,76 @@ Feature: Client Functionality
     And New Client Email girilir
     And Client sayfasindaki Save Changes butonuna tiklanir
     Then "expire date" Text boxinin altinda hata mesajinin gorundugu dogrulanir
+
+  Scenario: Mevcut kayit duzenlenebilir.(Isimde degisiklik)
+    And Ilk kaydin duzenle butonuna tiklanir
+    And "name" text boxindaki veri silinir, "Furkan ronaldo" yeni veri eklenir
+    And Client sayfasindaki Save Changes butonuna tiklanir
+    And Ilk kaydin duzenle butonuna tiklanir
+    Then "name" text boxindaki verinin "Furkan ronaldo" oldugu dogrulanir
+
+  Scenario: Mevcut kayit duzenlenebilir.(BSN degisiklik)
+    And Ilk kaydin duzenle butonuna tiklanir
+    And "bsn" text boxindaki veri silinir, "684768758765875" yeni veri eklenir
+    And Client sayfasindaki Save Changes butonuna tiklanir
+    And Ilk kaydin duzenle butonuna tiklanir
+    Then "bsn" text boxindaki verinin "684768758765875" oldugu dogrulanir
+
+  Scenario: Mevcut kayit duzenlenebilir.(Address degisiklik)
+    And Ilk kaydin duzenle butonuna tiklanir
+    And "address" text boxindaki veri silinir, "Schwerin" yeni veri eklenir
+    And Client sayfasindaki Save Changes butonuna tiklanir
+    And Ilk kaydin duzenle butonuna tiklanir
+    Then "address" text boxindaki verinin "Schwerin" oldugu dogrulanir
+
+  Scenario: Mevcut kayit duzenlenebilir.(Post Code degisiklik)
+    And Ilk kaydin duzenle butonuna tiklanir
+    And "post code" text boxindaki veri silinir, "064289" yeni veri eklenir
+    And Client sayfasindaki Save Changes butonuna tiklanir
+    And Ilk kaydin duzenle butonuna tiklanir
+    Then "post code" text boxindaki verinin "064289" oldugu dogrulanir
+
+  Scenario: Mevcut kayit duzenlenebilir.(Country degisiklik)
+    And Ilk kaydin duzenle butonuna tiklanir
+    And "country" text boxindaki veri silinir, "France" yeni veri eklenir
+    And Client sayfasindaki Save Changes butonuna tiklanir
+    And Ilk kaydin duzenle butonuna tiklanir
+    Then "country" text boxindaki verinin "France" oldugu dogrulanir
+
+  Scenario: Mevcut kayit duzenlenebilir.(Personal Name degisiklik)
+    And Ilk kaydin duzenle butonuna tiklanir
+    And "personal name" text boxindaki veri silinir, "Ahmet Necdet SEZER" yeni veri eklenir
+    And Client sayfasindaki Save Changes butonuna tiklanir
+    And Ilk kaydin duzenle butonuna tiklanir
+    Then "personal name" text boxindaki verinin "Ahmet Necdet SEZER" oldugu dogrulanir
+
+  Scenario: Mevcut kayit duzenlenebilir.(Phone Number degisiklik)
+    And Ilk kaydin duzenle butonuna tiklanir
+    And "phone number" text boxindaki veri silinir, "01784783948" yeni veri eklenir
+    And Client sayfasindaki Save Changes butonuna tiklanir
+    And Ilk kaydin duzenle butonuna tiklanir
+    Then "phone number" text boxindaki verinin "01784783948" oldugu dogrulanir
+
+  Scenario: Mevcut kayit duzenlenebilir.(Email degisiklik)
+    And Ilk kaydin duzenle butonuna tiklanir
+    And "email" text boxindaki veri silinir, "ahmet@gmail.com" yeni veri eklenir
+    And Client sayfasindaki Save Changes butonuna tiklanir
+    And Ilk kaydin duzenle butonuna tiklanir
+    Then "email" text boxindaki verinin "ahmet@gmail.com" oldugu dogrulanir
+
+  Scenario: Mevcut kayit duzenlenebilir.(Expire Date degisiklik)
+    And Ilk kaydin duzenle butonuna tiklanir
+    And "expire date" text boxindaki veri silinir, "2023-09-16" yeni veri eklenir
+    And Client sayfasindaki Save Changes butonuna tiklanir
+    And Ilk kaydin duzenle butonuna tiklanir
+    Then "expire date" text boxindaki verinin "2023-09-16" oldugu dogrulanir
+
+  Scenario: Mevcut kayit silinebilir. Silmeden önce kullanicidan onay istenir.
+    And 5.ci kaydin delete butonuna basilir
+    And Yes, delete it! butonuna tiklanir
+    Then Ilgili Kaydin listeden silindigi gozlemlenir
+
+  Scenario: Mevcut kayit silinebilir. Silmeden önce kullanicidan onay istenir. Kullanici onay vermezse kayit silinme islemi gerceklesmez
+    And 5.ci kaydin delete butonuna basilir
+    And Cancel butonuna tiklanir
+    Then Ilgili Kaydin listeden silinmedigi gozlemlenir

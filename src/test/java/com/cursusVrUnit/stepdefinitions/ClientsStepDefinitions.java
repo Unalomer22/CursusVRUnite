@@ -175,8 +175,8 @@ public class ClientsStepDefinitions {
 
     @Then("Olusturulan clientin verileri listeden dogrulanir")
     public void olusturulanClientinVerileriListedenDogrulanir() {
-        for (int i = 0; i < 5; i++){
-            Assert.assertEquals(expectedClientDatas.get(i),clientsPage.firstClientsDatas.get(i).getText());
+        for (int i = 0; i < 5; i++) {
+            Assert.assertEquals(expectedClientDatas.get(i), clientsPage.firstClientsDatas.get(i).getText());
         }
     }
 
@@ -231,7 +231,7 @@ public class ClientsStepDefinitions {
     @Then("{string} Text boxinin altinda hata mesajinin gorundugu dogrulanir")
     public void textBoxininAltindaMesajininGorunduguDogrulanir(String textBox) {
         String expectedErrorMessage = "This field is required.";
-        switch (textBox){
+        switch (textBox) {
             case "name":
                 Assert.assertEquals(expectedErrorMessage, clientsPage.nameErrorMessage.getText());
                 break;
@@ -263,6 +263,128 @@ public class ClientsStepDefinitions {
                 System.out.println("Yanlis girdi yapilmistir");
                 break;
         }
+    }
+
+    @And("{string} text boxindaki veri silinir, {string} yeni veri eklenir")
+    public void textBoxindakiVeriSilinirYeniVeriEklenir(String textBox, String newData) {
+        switch (textBox) {
+            case "name":
+                clientsPage.clientNameTextBox.clear();
+                clientsPage.clientNameTextBox.sendKeys(newData);
+                break;
+            case "bsn":
+                clientsPage.boxSerialNumber.clear();
+                clientsPage.boxSerialNumber.sendKeys(newData);
+                break;
+            case "address":
+                clientsPage.addressTextBox.clear();
+                clientsPage.addressTextBox.sendKeys(newData);
+                break;
+            case "post code":
+                clientsPage.postCodeTextBox.clear();
+                clientsPage.postCodeTextBox.sendKeys(newData);
+                break;
+            case "country":
+                clientsPage.countryTextBox.clear();
+                clientsPage.countryTextBox.sendKeys(newData);
+                break;
+            case "personal name":
+                clientsPage.personalNameTextBox.clear();
+                clientsPage.personalNameTextBox.sendKeys(newData);
+                break;
+            case "phone number":
+                clientsPage.phoneTextBox.clear();
+                clientsPage.phoneTextBox.sendKeys(newData);
+                break;
+            case "email":
+                clientsPage.emailTextBox.clear();
+                clientsPage.emailTextBox.sendKeys(newData);
+                break;
+            case "expire date":
+                clientsPage.expireDate.clear();
+                clientsPage.expireDate.sendKeys(newData);
+                Driver.getDriver().findElement(By.xpath("//html")).click();
+                break;
+            default:
+                System.out.println("Yanlis girdi yapilmistir");
+                break;
+        }
+    }
+
+    @Then("{string} text boxindaki verinin {string} oldugu dogrulanir")
+    public void textBoxindakiVerininOlduguDogrulanir(String textBox, String expectedData) {
+        System.out.println("------------------------------------");
+        System.out.println(clientsPage.clientNameTextBox.getText());
+        System.out.println(clientsPage.clientNameTextBox.getAttribute("value"));
+        switch (textBox) {
+            case "name":
+                Assert.assertEquals(expectedData, clientsPage.clientNameTextBox.getAttribute("value"));
+                break;
+            case "bsn":
+                Assert.assertEquals(expectedData, clientsPage.boxSerialNumber.getAttribute("value"));
+                break;
+            case "address":
+                Assert.assertEquals(expectedData, clientsPage.addressTextBox.getAttribute("value"));
+                break;
+            case "post code":
+                Assert.assertEquals(expectedData, clientsPage.postCodeTextBox.getAttribute("value"));
+                break;
+            case "country":
+                Assert.assertEquals(expectedData, clientsPage.countryTextBox.getAttribute("value"));
+                break;
+            case "personal name":
+                Assert.assertEquals(expectedData, clientsPage.personalNameTextBox.getAttribute("value"));
+                break;
+            case "phone number":
+                Assert.assertEquals(expectedData, clientsPage.phoneTextBox.getAttribute("value"));
+                break;
+            case "email":
+                Assert.assertEquals(expectedData, clientsPage.emailTextBox.getAttribute("value"));
+                break;
+            case "expire date":
+                Assert.assertEquals(expectedData, clientsPage.expireDate.getAttribute("value"));
+                break;
+            default:
+                System.out.println("Yanlis girdi yapilmistir");
+                break;
+        }
+    }
+
+    @And("Ilk kaydin duzenle butonuna tiklanir")
+    public void ilkKaydinDuzenleButonunaTiklanir() {
+        clientsPage.firstClientsEditButton.click();
+    }
+
+    String expectedClientDeletedName;
+
+    @And("{int}.ci kaydin delete butonuna basilir")
+    public void ciKaydinDeleteButonunaBasilir(int clientNumber) {
+        expectedClientDeletedName = Driver.getDriver().findElement(By.xpath("(//tr//td[1])[" + clientNumber + "]")).getText();
+        Driver.getDriver().findElement(By.xpath("(//a[@title='Delete'])[" + clientNumber + "]")).click();
+    }
+
+    @And("Yes, delete it! butonuna tiklanir")
+    public void yesDeleteItButonunaTiklanir() {
+        clientsPage.yesDeleteItButton.click();
+    }
+
+    @Then("Ilgili Kaydin listeden silindigi gozlemlenir")
+    public void ilgiliKaydinListedenSilindigiGozlemlenir() {
+        try {
+            Assert.assertFalse(Driver.getDriver().findElement(By.xpath("//*[text()='" + expectedClientDeletedName + "']")).isDisplayed());
+        } catch (Exception e) {
+            Assert.assertTrue(true);
+        }
+    }
+
+    @And("Cancel butonuna tiklanir")
+    public void cancelButonunaTiklanir() {
+        clientsPage.cancelButton.click();
+    }
+
+    @Then("Ilgili Kaydin listeden silinmedigi gozlemlenir")
+    public void ilgiliKaydinListedenSilinmedigiGozlemlenir() {
+        Assert.assertTrue(Driver.getDriver().findElement(By.xpath("//*[text()='" + expectedClientDeletedName + "']")).isDisplayed());
     }
 }
 
