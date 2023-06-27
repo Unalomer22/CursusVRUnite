@@ -5,11 +5,13 @@ import com.cursusVrUnit.utilities.BrowserUtils;
 import com.cursusVrUnit.utilities.Driver;
 import com.github.javafaker.Faker;
 import io.cucumber.java.en.And;
-import io.cucumber.java.eo.Se;
+import io.cucumber.java.en.Then;
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.Select;
+
+import static com.cursusVrUnit.utilities.BrowserUtils.waitFor;
 
 public class VideosStepDefinitions {
     VideosPage videosPage = new VideosPage();
@@ -24,7 +26,7 @@ public class VideosStepDefinitions {
 
     @And("Videos tabindaki Search butonuna tiklanir")
     public void videosTabindakiSearchButonunaTiklanir() {
-        BrowserUtils.waitFor(3);
+        waitFor(3);
         videosPage.searchButton.click();
     }
 
@@ -46,18 +48,71 @@ public class VideosStepDefinitions {
 
     @And("Clients drop downundan {string} clienti secilir")
     public void clientsDropDownundanClientiSecilir(String clientName) {
+        waitFor(3);
         WebElement element = Driver.getDriver().findElement(By.xpath("//div[text()='" + clientName + "']"));
         Actions actions = new Actions(Driver.getDriver());
         videosPage.clientsDropDown.click();
-        BrowserUtils.waitFor(3);
+        waitFor(3);
         actions.scrollToElement(element).perform();
         Driver.getDriver().findElement(By.xpath("//div[text()='" + clientName + "']")).click();
-        BrowserUtils.waitFor(3);
+        waitFor(3);
         Driver.getDriver().findElement(By.xpath("//i[@class='dropdown icon']")).click();
     }
 
     @And("Videos tabindaki save butonuna tiklanir")
     public void videosTabindakiSaveButonunaTiklanir() {
         videosPage.saveButton.click();
+    }
+
+    @Then("Faker ile uretilen title ile yeni bir videonun eklendigi dogrulanir")
+    public void titleindaYeniBirVideonunEklendigiDogrulanir() {
+        waitFor(2);
+        Assert.assertTrue(Driver.getDriver().findElement(By.xpath("//*[text()='" + videoTitle + "']")).isDisplayed());
+    }
+
+    @Then("Videos tabinda sistemin hata verdigi gozlemlenir")
+    public void videosTabindaTextBoxininAltindaSisteminHataVerdigiGozlemlenir() {
+        waitFor(3);
+        String expectedErrorMessage = "This field is required.";
+        try {
+            Assert.assertEquals(expectedErrorMessage, videosPage.errorMessage.getText());
+        } catch (Exception e) {
+            Assert.fail("Assertion Fail olmustur");
+        }
+    }
+
+    @And("Clients drop downundaki mevcut client silinir")
+    public void clientsDropDownundakiMevcutClientSilinir() {
+        waitFor(3);
+        BrowserUtils.waitForClickablility(videosPage.clientDeleteIcon, 10);
+        videosPage.clientDeleteIcon.click();
+    }
+
+    @Then("Ilgili videonun clientinin {string} oldugu dogrulanir")
+    public void ilgiliVideonunClientininOlduguDogrulanir(String expectedMewVideosClient) {
+        waitFor(3);
+        Assert.assertEquals(expectedMewVideosClient, videosPage.videonunClienti.getText());
+    }
+
+    String expectedVideoDeletedTitle;
+
+    @And("{int}.ci videonun delete butonuna basilir")
+    public void ciVideonunDeleteButonunaBasilir(int clientNumber) {
+        expectedVideoDeletedTitle = Driver.getDriver().findElement(By.xpath("(//tr//td[1])[" + clientNumber + "]")).getText();
+        Driver.getDriver().findElement(By.xpath("(//a[@title='Delete'])[" + clientNumber + "]")).click();
+    }
+
+    @Then("Ilgili Videonun listeden silindigi gozlemlenir")
+    public void ilgiliVideonunListedenSilindigiGozlemlenir() {
+        try {
+            Assert.assertFalse(Driver.getDriver().findElement(By.xpath("//*[text()='" + expectedVideoDeletedTitle + "']")).isDisplayed());
+        } catch (Exception e) {
+            Assert.assertTrue(true);
+        }
+    }
+
+    @Then("Ilgili Videonun listeden silinmedigi gozlemlenir")
+    public void ilgiliVideonunListedenSilinmedigiGozlemlenir() {
+        Assert.assertTrue(Driver.getDriver().findElement(By.xpath("//*[text()='" + expectedVideoDeletedTitle + "']")).isDisplayed());
     }
 }
