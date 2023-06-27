@@ -1,6 +1,7 @@
 package com.cursusVrUnit.stepdefinitions;
 
 import com.cursusVrUnit.pages.ClientsPage;
+import com.cursusVrUnit.pages.VideosPage;
 import com.cursusVrUnit.utilities.BrowserUtils;
 import com.cursusVrUnit.utilities.Driver;
 import com.github.javafaker.Faker;
@@ -19,6 +20,7 @@ import java.util.List;
 
 public class ClientsStepDefinitions {
     ClientsPage clientsPage = new ClientsPage();
+    VideosPage videosPage = new VideosPage();
     static Faker faker = new Faker();
     List<String> expectedClientDatas = new ArrayList<>();
     Actions actions = new Actions(Driver.getDriver());
@@ -343,6 +345,9 @@ public class ClientsStepDefinitions {
                 break;
             case "expire date":
                 Assert.assertEquals(expectedData, clientsPage.expireDate.getAttribute("value"));
+                break;
+            case "Title":
+                Assert.assertEquals(expectedData, videosPage.videoTitleTextBox.getAttribute("value"));
                 break;
             default:
                 System.out.println("Yanlis girdi yapilmistir");

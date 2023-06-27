@@ -29,9 +29,75 @@ Feature: Videos Functionality
     And Sayfanin altinda bulunan "2" butonuna tiklanir
     Then Sayfanin "2".ci sayfada oldugu dogrulanir
 
-    Scenario: Yeni video yuklenebilir
-      And Create New Video butonuna tiklanir
-      And New Video Titlei girilir
-      And Bilgisayardan video secilir
-      And Clients drop downundan "Omer UNAL" clienti secilir
-      And Videos tabindaki save butonuna tiklanir
+  Scenario: Yeni video yuklenebilir
+    And Create New Video butonuna tiklanir
+    And New Video Titlei girilir
+    And Bilgisayardan video secilir
+    And Clients drop downundan "Omer UNAL" clienti secilir
+    And Videos tabindaki save butonuna tiklanir
+    Then Faker ile uretilen title ile yeni bir videonun eklendigi dogrulanir
+
+  @wip3
+  Scenario: Eksik girdilerle yeni video yuklenmesi yapilamamalidir(Title eksik)
+    And Create New Video butonuna tiklanir
+    And Bilgisayardan video secilir
+    And Clients drop downundan "Omer UNAL" clienti secilir
+    And Videos tabindaki save butonuna tiklanir
+    Then Videos tabinda sistemin hata verdigi gozlemlenir
+
+  Scenario: Eksik girdilerle yeni video yuklenmesi yapilamamalidir(Video eksik)
+    And Create New Video butonuna tiklanir
+    And New Video Titlei girilir
+    And Clients drop downundan "Omer UNAL" clienti secilir
+    And Videos tabindaki save butonuna tiklanir
+    Then Videos tabinda sistemin hata verdigi gozlemlenir
+
+  Scenario: Eksik girdilerle yeni video yuklenmesi yapilamamalidir(Client eksik)
+    And Create New Video butonuna tiklanir
+    And New Video Titlei girilir
+    And Bilgisayardan video secilir
+    And Videos tabindaki save butonuna tiklanir
+    Then Videos tabinda sistemin hata verdigi gozlemlenir
+
+  Scenario: Birden fazla musteri icin kayit olusturulabilir.
+    And Create New Video butonuna tiklanir
+    And New Video Titlei girilir
+    And Bilgisayardan video secilir
+    And Clients drop downundan "Omer UNAL" clienti secilir
+    And Clients drop downundan "Musteri04" clienti secilir
+    And Videos tabindaki save butonuna tiklanir
+    Then Faker ile uretilen title ile yeni bir videonun eklendigi dogrulanir
+
+  Scenario: Mevcut video duzenlenebilir.(Titleda degisiklik)
+    And Ilk kaydin duzenle butonuna tiklanir
+    And "Title" text boxindaki veri silinir, "Yeni Title" yeni veri eklenir
+    And Videos tabindaki save butonuna tiklanir
+    And Ilk kaydin duzenle butonuna tiklanir
+    Then "Title" text boxindaki verinin "Yeni Title" oldugu dogrulanir
+
+#UNAUTOMATED
+#  Scenario: Mevcut video duzenlenebilir.(Video degisiklik)
+#    And Ilk kaydin duzenle butonuna tiklanir
+#    And "Title" text boxindaki veri silinir, "Yeni Title" yeni veri eklenir
+#    And Videos tabindaki save butonuna tiklanir
+#    And Ilk kaydin duzenle butonuna tiklanir
+#    Then "Title" text boxindaki verinin "Yeni Title" oldugu dogrulanir
+
+  Scenario: Mevcut video duzenlenebilir.(Clientte degisiklik)
+    And Ilk kaydin duzenle butonuna tiklanir
+    And Clients drop downundaki mevcut client silinir
+    And Clients drop downundan "Musteri09" clienti secilir
+    And Videos tabindaki save butonuna tiklanir
+    And "Videos" sayfasi acilir
+    And Ilk kaydin duzenle butonuna tiklanir
+    Then Ilgili videonun clientinin "Musteri09" oldugu dogrulanir
+
+  Scenario: Mevcut kayit silinebilir. Silmeden önce kullanicidan onay istenir.
+    And 3.ci videonun delete butonuna basilir
+    And Yes, delete it! butonuna tiklanir
+    Then Ilgili Videonun listeden silindigi gozlemlenir
+
+  Scenario: Mevcut kayit silinebilir. Silmeden önce kullanicidan onay istenir. Kullanici onay vermezse kayit silinme islemi gerceklesmez
+    And 3.ci videonun delete butonuna basilir
+    And Cancel butonuna tiklanir
+    Then Ilgili Videonun listeden silinmedigi gozlemlenir

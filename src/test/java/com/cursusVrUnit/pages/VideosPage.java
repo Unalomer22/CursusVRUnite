@@ -26,4 +26,12 @@ public class VideosPage extends BasePage {
     @FindBy(xpath = "//div[@class='prompt srch_explore ui dropdown cntry152 selection multiple']")
     public WebElement clientsDropDown;
 
+    @FindBy(xpath = "//div[@class='help-block']")
+    public WebElement errorMessage;
+
+    @FindBy(xpath = "//i[@class='delete icon']")
+    public WebElement clientDeleteIcon;
+
+    @FindBy(xpath = "//div[@class='prompt srch_explore ui dropdown cntry152 selection multiple']//a")
+    public WebElement videonunClienti;
 }
