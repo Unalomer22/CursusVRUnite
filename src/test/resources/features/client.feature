@@ -8,25 +8,16 @@ Feature: Client Functionality
     And Login sayfasindaki login butonuna tiklanir
     And "Clients" sayfasi acilir
 
-  Scenario: Listede arama yapilabilir(Isme gore)
-    And Clients tabindaki arama kutusuna "Musteri10" musterisinin bilgisi yazilir
+  Scenario Outline: Listede arama yapilabilir(Isme gore, BSN gore, Telefon numarasina gore, Ulkeye gore)
+    And Clients tabindaki arama kutusuna "<arananVeri>" musterisinin bilgisi yazilir
     And Search butonuna tiklanir
-    Then Listelenen verilerin "Musteri10" yi icerdigi dogrulanir
-
-  Scenario: Listede arama yapilabilir(BSN gore)
-    And Clients tabindaki arama kutusuna "23131221331221123" musterisinin bilgisi yazilir
-    And Search butonuna tiklanir
-    Then Listelenen verilerin "23131221331221123" musterisinin BSNsini icerdigi dogrulanir
-
-  Scenario: Listede arama yapilabilir(Telefon numarasina gore)
-    And Clients tabindaki arama kutusuna "123123123123" musterisinin bilgisi yazilir
-    And Search butonuna tiklanir
-    Then Listelenen verilerin "123123123123" musterisinin telefon numarasini icerdigi dogrulanir
-
-  Scenario: Listede arama yapilabilir(Ulkeye gore)
-    And Clients tabindaki arama kutusuna "Almanya" musterisinin bilgisi yazilir
-    And Search butonuna tiklanir
-    Then Listelenen verilerin "Almanya" musterisinin ulkesini icerdigi dogrulanir
+    Then Listelenen verilerin "<arananVeri>" yi icerdigi dogrulanir
+    Examples: Sutuna gore sirasiyla arama yapilacak veriler
+      | arananVeri        |
+      | Musteri10         |
+      | 23131221331221123 |
+      | 123123123123      |
+      | Almanya           |
 
   Scenario: Listede arama yapilabilir(Isme göre ve mevcut olmayan bir isim)
     And Clients tabindaki arama kutusuna "Ahmet" musterisinin bilgisi yazilir
@@ -172,68 +163,23 @@ Feature: Client Functionality
     And Yeni kayit olusturma sayfasindaki Save Changes butonuna tiklanir
     Then "expire date" Text boxinin altinda hata mesajinin gorundugu dogrulanir
 
-  Scenario: Mevcut kayit duzenlenebilir.(Isimde degisiklik)
+  Scenario Outline: Mevcut kayit duzenlenebilir.(Isimde degisiklik)
     And Ilk kaydin duzenle butonuna tiklanir
-    And "name" text boxindaki veri silinir, "Furkan ronaldo" yeni veri eklenir
+    And "<degisiklikYapilacakAlan>" text boxindaki veri silinir, "<yeniVeri>" yeni veri eklenir
     And Yeni kayit olusturma sayfasindaki Save Changes butonuna tiklanir
     And Ilk kaydin duzenle butonuna tiklanir
-    Then "name" text boxindaki verinin "Furkan ronaldo" oldugu dogrulanir
-
-  Scenario: Mevcut kayit duzenlenebilir.(BSN degisiklik)
-    And Ilk kaydin duzenle butonuna tiklanir
-    And "bsn" text boxindaki veri silinir, "684768758765875" yeni veri eklenir
-    And Yeni kayit olusturma sayfasindaki Save Changes butonuna tiklanir
-    And Ilk kaydin duzenle butonuna tiklanir
-    Then "bsn" text boxindaki verinin "684768758765875" oldugu dogrulanir
-
-  Scenario: Mevcut kayit duzenlenebilir.(Address degisiklik)
-    And Ilk kaydin duzenle butonuna tiklanir
-    And "address" text boxindaki veri silinir, "Schwerin" yeni veri eklenir
-    And Yeni kayit olusturma sayfasindaki Save Changes butonuna tiklanir
-    And Ilk kaydin duzenle butonuna tiklanir
-    Then "address" text boxindaki verinin "Schwerin" oldugu dogrulanir
-
-  Scenario: Mevcut kayit duzenlenebilir.(Post Code degisiklik)
-    And Ilk kaydin duzenle butonuna tiklanir
-    And "post code" text boxindaki veri silinir, "064289" yeni veri eklenir
-    And Yeni kayit olusturma sayfasindaki Save Changes butonuna tiklanir
-    And Ilk kaydin duzenle butonuna tiklanir
-    Then "post code" text boxindaki verinin "064289" oldugu dogrulanir
-
-  Scenario: Mevcut kayit duzenlenebilir.(Country degisiklik)
-    And Ilk kaydin duzenle butonuna tiklanir
-    And "country" text boxindaki veri silinir, "France" yeni veri eklenir
-    And Yeni kayit olusturma sayfasindaki Save Changes butonuna tiklanir
-    And Ilk kaydin duzenle butonuna tiklanir
-    Then "country" text boxindaki verinin "France" oldugu dogrulanir
-
-  Scenario: Mevcut kayit duzenlenebilir.(Personal Name degisiklik)
-    And Ilk kaydin duzenle butonuna tiklanir
-    And "personal name" text boxindaki veri silinir, "Ahmet Necdet SEZER" yeni veri eklenir
-    And Yeni kayit olusturma sayfasindaki Save Changes butonuna tiklanir
-    And Ilk kaydin duzenle butonuna tiklanir
-    Then "personal name" text boxindaki verinin "Ahmet Necdet SEZER" oldugu dogrulanir
-
-  Scenario: Mevcut kayit duzenlenebilir.(Phone Number degisiklik)
-    And Ilk kaydin duzenle butonuna tiklanir
-    And "phone number" text boxindaki veri silinir, "01784783948" yeni veri eklenir
-    And Yeni kayit olusturma sayfasindaki Save Changes butonuna tiklanir
-    And Ilk kaydin duzenle butonuna tiklanir
-    Then "phone number" text boxindaki verinin "01784783948" oldugu dogrulanir
-
-  Scenario: Mevcut kayit duzenlenebilir.(Email degisiklik)
-    And Ilk kaydin duzenle butonuna tiklanir
-    And "email" text boxindaki veri silinir, "ahmet@gmail.com" yeni veri eklenir
-    And Yeni kayit olusturma sayfasindaki Save Changes butonuna tiklanir
-    And Ilk kaydin duzenle butonuna tiklanir
-    Then "email" text boxindaki verinin "ahmet@gmail.com" oldugu dogrulanir
-
-  Scenario: Mevcut kayit duzenlenebilir.(Expire Date degisiklik)
-    And Ilk kaydin duzenle butonuna tiklanir
-    And "expire date" text boxindaki veri silinir, "2023-09-16" yeni veri eklenir
-    And Yeni kayit olusturma sayfasindaki Save Changes butonuna tiklanir
-    And Ilk kaydin duzenle butonuna tiklanir
-    Then "expire date" text boxindaki verinin "2023-09-16" oldugu dogrulanir
+    Then "<degisiklikYapilacakAlan>" text boxindaki verinin "<yeniVeri>" oldugu dogrulanir
+    Examples:
+      | degisiklikYapilacakAlan | yeniVeri           |
+      | name                    | Furkan ronaldo     |
+      | bsn                     | 684768758765875    |
+      | address                 | Schwerin           |
+      | post code               | 064289             |
+      | country                 | France             |
+      | personal name           | Ahmet Necdet SEZER |
+      | phone number            | 01784783948        |
+      | email                   | ahmet@gmail.com    |
+      | expire date             | 2023-09-16         |
 
   Scenario: Mevcut kayit silinebilir. Silmeden önce kullanicidan onay istenir.
     And 5.ci kaydin delete butonuna basilir

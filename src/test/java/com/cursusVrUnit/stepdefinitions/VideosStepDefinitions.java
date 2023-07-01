@@ -4,7 +4,6 @@ import com.cursusVrUnit.pages.VideosPage;
 import com.cursusVrUnit.utilities.BrowserUtils;
 import com.cursusVrUnit.utilities.Driver;
 import com.github.javafaker.Faker;
-import io.cucumber.java.Scenario;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import org.junit.Assert;
