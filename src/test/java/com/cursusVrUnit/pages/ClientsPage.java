@@ -7,7 +7,6 @@ import java.util.List;
 
 public class ClientsPage extends BasePage {
 
-
     @FindBy(id = "id_name")
     public WebElement searchTextBox;
 
@@ -89,7 +88,7 @@ public class ClientsPage extends BasePage {
     @FindBy(xpath = "//button[@class='swal2-cancel swal2-styled swal2-default-outline']")
     public WebElement cancelButton;
 
-    public void a(){
+    public void a() {
     }
 
 }

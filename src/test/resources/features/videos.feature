@@ -37,7 +37,6 @@ Feature: Videos Functionality
     And Yeni kayit olusturma sayfasindaki Save Changes butonuna tiklanir
     Then Faker ile uretilen title ile yeni bir videonun eklendigi dogrulanir
 
-  @wip3
   Scenario: Eksik girdilerle yeni video yuklenmesi yapilamamalidir(Title eksik)
     And Create New "Video" butonuna tiklanir
     And Bilgisayardan video secilir
@@ -59,14 +58,18 @@ Feature: Videos Functionality
     And Yeni kayit olusturma sayfasindaki Save Changes butonuna tiklanir
     Then Videos tabinda sistemin hata verdigi gozlemlenir
 
-  Scenario: Birden fazla musteri icin kayit olusturulabilir.
+  Scenario Outline: Birden fazla musteri icin kayit olusturulabilir.
     And Create New "Video" butonuna tiklanir
     And New Video Titlei girilir
     And Bilgisayardan video secilir
-    And Clients drop downundan "Omer UNAL" clienti secilir
-    And Clients drop downundan "Musteri04" clienti secilir
+    And Clients drop downundan "<musteri01>" clienti secilir
+    And Clients drop downundan "<musteri02>" clienti secilir
     And Yeni kayit olusturma sayfasindaki Save Changes butonuna tiklanir
     Then Faker ile uretilen title ile yeni bir videonun eklendigi dogrulanir
+    Examples: Musteriler
+      | musteri01 | musteri02 |
+      | Omer UNAL | Musteri04 |
+      | Musteri07 | Musteri09 |
 
   Scenario: Mevcut video duzenlenebilir.(Titleda degisiklik)
     And Ilk kaydin duzenle butonuna tiklanir

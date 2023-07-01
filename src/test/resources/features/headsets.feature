@@ -52,7 +52,7 @@ Feature: Headset Functionality
 
 
 #    Email gonderme servisine email verisi gitmedigi icin, servis hata veriyor. Paneli kullanan kisi bu hata ile karsilasiyor.
-  # Bunun yerine Diger fieldlarda oldugu gibi "This field is required." hatasi tarzinda hatalar daha uygun olur.
+#   Bunun yerine Diger fieldlarda oldugu gibi "This field is required." hatasi tarzinda hatalar daha uygun olur.
 #  Scenario: Eksik girdilerle yeni headset yuklenmesi yapilamamalidir(Musteri eksik)
 #    And Create New "Headset" butonuna tiklanir
 #    And Yeni Headsetin Serial Numberi girilir

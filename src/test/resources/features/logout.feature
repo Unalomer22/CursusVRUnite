@@ -25,7 +25,6 @@ Feature: User Functionalities
       | Videos    |
       | Headsets  |
 
-
   Scenario: Kullanici sifresini gecerli bir sifre ile degistirebilir
     And Sag ustte bulunan kullanici ikonuna tiklanir
     And "Change Password" sayfasi acilir
@@ -40,26 +39,15 @@ Feature: User Functionalities
     Then Sisteme login yapildigi dogrulanir
     Then Sistemin sifre degistirildigine dair mesaji dogrulanir
 
-  Scenario: Kullanici sifresini gecersiz(Your password must contain at least 8 characters.) sifre ile degistiremez.
+  Scenario Outline: Kullanici sifresini gecersiz(Your password must contain at least 8 characters. & Your password can’t be entirely numeric.) sifre ile degistiremez.
     And Sag ustte bulunan kullanici ikonuna tiklanir
     And "Change Password" sayfasi acilir
     And Old Password text boxina "password01" sifresi yazilir
-    And New Password text boxina gecersiz "sekizKarakterAz" sifre yazilir
+    And New Password text boxina gecersiz "<invalidPassword>" sifre yazilir
     And New Password Confirmation text boxina gecersiz sifre yazilir
     And Save butonuna tiklanir
     Then Eski sifrenin yeni sifre ile degistirilmedigi dogrulanir
-
-    #Senaryoyu duzenle
-  Scenario: Kullanici sifresini gecersiz(Your password can’t be entirely numeric.) sifre ile degistiremez.
-    And Sag ustte bulunan kullanici ikonuna tiklanir
-    And "Change Password" sayfasi acilir
-    And Old Password text boxina "password01" sifresi yazilir
-    And New Password text boxina gecersiz "digitsOnly" sifre yazilir
-    And New Password Confirmation text boxina gecersiz sifre yazilir
-    And Save butonuna tiklanir
-    Then Eski sifrenin yeni sifre ile degistirilmedigi dogrulanir
-
-
-
-
-
+    Examples: Invalid Cridentials
+      | invalidPassword |
+      | sekizKarakterAz |
+      | digitsOnly      |

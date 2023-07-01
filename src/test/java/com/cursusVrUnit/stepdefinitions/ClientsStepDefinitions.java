@@ -3,13 +3,10 @@ package com.cursusVrUnit.stepdefinitions;
 import com.cursusVrUnit.pages.ClientsPage;
 import com.cursusVrUnit.pages.HeadsetsPage;
 import com.cursusVrUnit.pages.VideosPage;
-import com.cursusVrUnit.utilities.BrowserUtils;
 import com.cursusVrUnit.utilities.Driver;
 import com.github.javafaker.Faker;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
-import io.cucumber.java.en_old.Ac;
-import org.checkerframework.checker.units.qual.C;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -135,7 +132,6 @@ public class ClientsStepDefinitions {
 
     @And("Gerekli valid Client bilgileri girilir")
     public void gerekliValidClientBilgileriGirilir() {
-
         expectedClientDatas.add(clientName);
         expectedClientDatas.add(clientBSNNumber);
         expectedClientDatas.add(clientPhoneNumber);
