@@ -47,14 +47,6 @@
             <version>4.9.1</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/org.testng/testng -->
-        <dependency>
-            <groupId>org.testng</groupId>
-            <artifactId>testng</artifactId>
-            <version>7.8.0</version>
-            <scope>test</scope>
-        </dependency>
-
     </dependencies>
 
     <build>
@@ -94,7 +86,7 @@
             <plugin>
                 <groupId>net.masterthought</groupId>
                 <artifactId>maven-cucumber-reporting</artifactId>
-                <version>5.0.0</version>
+                <version>4.2.3</version>
                 <executions>
                     <execution>
                         <id>execution</id>
@@ -104,14 +96,14 @@
                         </goals>
                         <configuration>
                             <projectName>CursusVRUnite</projectName>
-                            <outputDirectory>${project.build.directory}</outputDirectory>
-                            <inputDirectory>${project.build.directory}</inputDirectory>
+                            <!-- output directory for the generated report -->
+                            <outputDirectory>${project.build.directory}/cucumber-maven-report</outputDirectory>
+                            <inputDirectory>${project.build.directory}/cucumber-json</inputDirectory>
                             <jsonFiles>
-                                <param>**/json-target/cucumber.json</param>
-                            </jsonFiles><classificationFiles>->
-                            <param>sample.properties</param>
-                            <param>other.properties</param>
-                        </classificationFiles>
+                                <!-- supports wildcard or name pattern -->
+                                <param>**/*.json</param>
+                            </jsonFiles>
+                            <buildNumber>10.2.1</buildNumber>
                         </configuration>
                     </execution>
                 </executions>
