@@ -23,7 +23,7 @@ public class VideosPage extends BasePage {
     @FindBy(id = "id_file")
     public WebElement videoUpload;
 
-    @FindBy(xpath = "//div[@class='prompt srch_explore ui dropdown cntry152 selection multiple']")
+    @FindBy(xpath = "//i[@class='dropdown icon']")
     public WebElement clientsDropDown;
 
     @FindBy(xpath = "//div[@class='help-block']")

@@ -4,6 +4,7 @@ import com.cursusVrUnit.pages.VideosPage;
 import com.cursusVrUnit.utilities.BrowserUtils;
 import com.cursusVrUnit.utilities.Driver;
 import com.github.javafaker.Faker;
+import io.cucumber.java.Scenario;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import org.junit.Assert;
@@ -56,13 +57,9 @@ public class VideosStepDefinitions {
         actions.scrollToElement(element).perform();
         Driver.getDriver().findElement(By.xpath("//div[text()='" + clientName + "']")).click();
         waitFor(3);
-        Driver.getDriver().findElement(By.xpath("//i[@class='dropdown icon']")).click();
+        Driver.getDriver().findElement(By.xpath("//h2")).click();
     }
 
-    @And("Videos tabindaki save butonuna tiklanir")
-    public void videosTabindakiSaveButonunaTiklanir() {
-        videosPage.saveButton.click();
-    }
 
     @Then("Faker ile uretilen title ile yeni bir videonun eklendigi dogrulanir")
     public void titleindaYeniBirVideonunEklendigiDogrulanir() {
@@ -88,7 +85,7 @@ public class VideosStepDefinitions {
         videosPage.clientDeleteIcon.click();
     }
 
-    @Then("Ilgili videonun clientinin {string} oldugu dogrulanir")
+    @Then("Ilgili kaydin clientinin {string} oldugu dogrulanir")
     public void ilgiliVideonunClientininOlduguDogrulanir(String expectedMewVideosClient) {
         waitFor(3);
         Assert.assertEquals(expectedMewVideosClient, videosPage.videonunClienti.getText());
@@ -102,7 +99,7 @@ public class VideosStepDefinitions {
         Driver.getDriver().findElement(By.xpath("(//a[@title='Delete'])[" + clientNumber + "]")).click();
     }
 
-    @Then("Ilgili Videonun listeden silindigi gozlemlenir")
+    @Then("Ilgili kaydin listeden silindigi gozlemlenir")
     public void ilgiliVideonunListedenSilindigiGozlemlenir() {
         try {
             Assert.assertFalse(Driver.getDriver().findElement(By.xpath("//*[text()='" + expectedVideoDeletedTitle + "']")).isDisplayed());
@@ -111,7 +108,7 @@ public class VideosStepDefinitions {
         }
     }
 
-    @Then("Ilgili Videonun listeden silinmedigi gozlemlenir")
+    @Then("Ilgili kaydin listeden silinmedigi gozlemlenir")
     public void ilgiliVideonunListedenSilinmedigiGozlemlenir() {
         Assert.assertTrue(Driver.getDriver().findElement(By.xpath("//*[text()='" + expectedVideoDeletedTitle + "']")).isDisplayed());
     }

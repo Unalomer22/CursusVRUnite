@@ -1,6 +1,7 @@
 package com.cursusVrUnit.stepdefinitions;
 
 import com.cursusVrUnit.pages.ClientsPage;
+import com.cursusVrUnit.pages.HeadsetsPage;
 import com.cursusVrUnit.pages.VideosPage;
 import com.cursusVrUnit.utilities.BrowserUtils;
 import com.cursusVrUnit.utilities.Driver;
@@ -17,6 +18,8 @@ import org.openqa.selenium.interactions.Actions;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.cursusVrUnit.utilities.BrowserUtils.waitFor;
 
 public class ClientsStepDefinitions {
     ClientsPage clientsPage = new ClientsPage();
@@ -42,15 +45,15 @@ public class ClientsStepDefinitions {
         clientsPage.searchTextBox.sendKeys(arananMusteriBilgisi);
     }
 
-    @And("Clients tabindaki Search butonuna tiklanir")
-    public void clientsTabindakiSearchButonunaTiklanir() {
-        BrowserUtils.waitFor(3);
+    @And("Search butonuna tiklanir")
+    public void searchButonunaTiklanir() {
+        waitFor(3);
         clientsPage.searchButton.click();
     }
 
-    @Then("Listelenen verilerin {string} musterisinin ismini icerdigi dogrulanir")
+    @Then("Listelenen verilerin {string} yi icerdigi dogrulanir")
     public void listelenenVerilerinMusterisiniIcerdigiDogrulanir(String expectedClientName) {
-        BrowserUtils.waitFor(3);
+        waitFor(3);
         for (WebElement w : clientsPage.musteriIsimListesi) {
             Assert.assertEquals(expectedClientName, w.getText());
         }
@@ -58,7 +61,7 @@ public class ClientsStepDefinitions {
 
     @Then("Listelenen verilerin {string} musterisinin BSNsini icerdigi dogrulanir")
     public void listelenenVerilerinMusterisininBsnsiniIcerdigiDogrulanir(String expectedClientBSN) {
-        BrowserUtils.waitFor(3);
+        waitFor(3);
         for (WebElement w : clientsPage.musteriIsimListesi) {
             Assert.assertEquals(expectedClientBSN, w.getText());
         }
@@ -66,7 +69,7 @@ public class ClientsStepDefinitions {
 
     @Then("Listelenen verilerin {string} musterisinin telefon numarasini icerdigi dogrulanir")
     public void listelenenVerilerinMusterisininTelefonNumarasiniIcerdigiDogrulanir(String expectedClienPhoneNumber) {
-        BrowserUtils.waitFor(3);
+        waitFor(3);
         for (WebElement w : clientsPage.musteriIsimListesi) {
             Assert.assertEquals(expectedClienPhoneNumber, w.getText());
         }
@@ -74,7 +77,7 @@ public class ClientsStepDefinitions {
 
     @Then("Listelenen verilerin {string} musterisinin ulkesini icerdigi dogrulanir")
     public void listelenenVerilerinMusterisininUlkesiniIcerdigiDogrulanir(String expectedClientCountry) {
-        BrowserUtils.waitFor(3);
+        waitFor(3);
         for (WebElement w : clientsPage.musteriIsimListesi) {
             Assert.assertEquals(expectedClientCountry, w.getText());
         }
@@ -82,7 +85,7 @@ public class ClientsStepDefinitions {
 
     @Then("Listelenen verilerin {string} musterisinin ismini icermedigi dogrulanir")
     public void listelenenVerilerinMusterisininIsminiIcermedigiDogrulanir(String expectedClientName) {
-        BrowserUtils.waitFor(3);
+        waitFor(3);
         for (WebElement w : clientsPage.musteriIsimListesi) {
             Assert.assertFalse(w.getText().contains(expectedClientName));
         }
@@ -125,8 +128,8 @@ public class ClientsStepDefinitions {
         Assert.assertEquals(expectedPageNumber, actualPageNumber);
     }
 
-    @And("Create New Client butonuna tiklanir")
-    public void createNewClientButonunaTiklanir() {
+    @And("Create New Client butonuna tiklanir {string}")
+    public void createNewClientButonunaTiklanir(String a) {
         clientsPage.createNewClientButton.click();
     }
 
@@ -159,9 +162,9 @@ public class ClientsStepDefinitions {
                 sendKeys(Keys.TAB).
                 sendKeys(clientExpireDate).
                 perform();
-        BrowserUtils.waitFor(3);
+        waitFor(3);
         Driver.getDriver().findElement(By.xpath("//html")).click();
-        BrowserUtils.waitFor(3);
+        waitFor(3);
     }
 
     public static void main(String[] args) {
@@ -170,8 +173,9 @@ public class ClientsStepDefinitions {
         System.out.println(faker.phoneNumber().phoneNumber());
     }
 
-    @And("Client sayfasindaki Save Changes butonuna tiklanir")
-    public void clientSayfasindakiSaveChangesButonunaTiklanir() {
+    @And("Yeni kayit olusturma sayfasindaki Save Changes butonuna tiklanir")
+    public void yeniKayitOlusturSayfasindakiSaveChangesButonunaTiklanir() {
+        waitFor(3);
         clientsPage.saveChangesButton.click();
     }
 
@@ -225,9 +229,9 @@ public class ClientsStepDefinitions {
     @And("New Client Expire Date girilir")
     public void newClientExpireDateGirilir() {
         clientsPage.expireDate.sendKeys(clientExpireDate);
-        BrowserUtils.waitFor(1);
+        waitFor(1);
         Driver.getDriver().findElement(By.xpath("//html")).click();
-        BrowserUtils.waitFor(1);
+        waitFor(1);
     }
 
     @Then("{string} Text boxinin altinda hata mesajinin gorundugu dogrulanir")
@@ -261,6 +265,8 @@ public class ClientsStepDefinitions {
             case "expire date":
                 Assert.assertEquals(expectedErrorMessage, clientsPage.expireDateErrorMessage.getText());
                 break;
+            case "serial number":
+                Assert.assertEquals(expectedErrorMessage, new HeadsetsPage().serialNumberErrorMessage.getText());
             default:
                 System.out.println("Yanlis girdi yapilmistir");
                 break;
@@ -390,6 +396,11 @@ public class ClientsStepDefinitions {
     @Then("Ilgili Kaydin listeden silinmedigi gozlemlenir")
     public void ilgiliKaydinListedenSilinmedigiGozlemlenir() {
         Assert.assertTrue(Driver.getDriver().findElement(By.xpath("//*[text()='" + expectedClientDeletedName + "']")).isDisplayed());
+    }
+
+    @And("Create New {string} butonuna tiklanir")
+    public void createNewButonunaTiklanir(String arg0) {
+        Driver.getDriver().findElement(By.xpath("//button[contains(text(),'" + arg0 +"')]")).click();
     }
 }
 
