@@ -89,5 +89,7 @@ public class ClientsPage extends BasePage {
     @FindBy(xpath = "//button[@class='swal2-cancel swal2-styled swal2-default-outline']")
     public WebElement cancelButton;
 
+    public void a(){
+    }
 
 }
