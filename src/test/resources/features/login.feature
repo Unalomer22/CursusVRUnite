@@ -3,7 +3,7 @@ Feature: Login
   Background: Login Page'e giris
     Given Cursus Ana Sayfasina gidilir
     And Ana sayfadaki login butonuna tiklanir
-
+@wip
   Scenario: Login with valid username and password
     And "username01" username girilir
     And "password01" sifre girilir
