@@ -6,7 +6,7 @@ import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
-        plugin = {"json:target/cucumber.json"},
+        plugin = {"json:target/cucumber-json/cucumber.json"},
         features = "src/test/resources/features",
         glue = "com/cursusVrUnit/stepdefinitions",
         //dryRun = true, //oldugunda sadece eksik senaryoyu calistiriyor.
