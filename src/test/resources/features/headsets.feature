@@ -32,21 +32,21 @@ Feature: Headset Functionality
   Scenario: Yeni kayit olusturulabilir(Headset & Aktif)
     And Create New "Headset" butonuna tiklanir
     And Yeni Headsetin Serial Numberi girilir
-    And Clients drop downundan "Omer UNAL" clienti secilir
+    And Clients drop downundan "Musteri06" clienti secilir
     And Yeni kayit olusturma sayfasindaki Save Changes butonuna tiklanir
     Then Olusturulan Headsetin verileri listeden dogrulanir
 
   Scenario: Yeni kayit olusturulabilir(Headset & Deaktif)
     And Create New "Headset" butonuna tiklanir
     And Yeni Headsetin Serial Numberi girilir
-    And Clients drop downundan "Omer UNAL" clienti secilir
+    And Clients drop downundan "Musteri06" clienti secilir
     And Is Active check box'ina tiklanir
     And Yeni kayit olusturma sayfasindaki Save Changes butonuna tiklanir
     Then Olusturulan Headsetin verileri listeden dogrulanir
 
   Scenario: Eksik girdilerle yeni headset yuklenmesi yapilamamalidir(Serial Number eksik)
     And Create New "Headset" butonuna tiklanir
-    And Clients drop downundan "Omer UNAL" clienti secilir
+    And Clients drop downundan "Musteri06" clienti secilir
     And Yeni kayit olusturma sayfasindaki Save Changes butonuna tiklanir
     Then "serial number" Text boxinin altinda hata mesajinin gorundugu dogrulanir
 
@@ -69,7 +69,6 @@ Feature: Headset Functionality
 
   Scenario: Mevcut headset duzenlenebilir.(Clientte degisiklik)
     And Ilk kaydin duzenle butonuna tiklanir
-    And Clients drop downundaki mevcut client silinir
     And Clients drop downundan "Musteri09" clienti secilir
     And Yeni kayit olusturma sayfasindaki Save Changes butonuna tiklanir
     And Ilk kaydin duzenle butonuna tiklanir

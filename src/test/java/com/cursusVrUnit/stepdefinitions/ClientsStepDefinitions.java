@@ -44,13 +44,11 @@ public class ClientsStepDefinitions {
 
     @And("Search butonuna tiklanir")
     public void searchButonunaTiklanir() {
-        waitFor(3);
         clientsPage.searchButton.click();
     }
 
     @Then("Listelenen verilerin {string} yi icerdigi dogrulanir")
     public void listelenenVerilerinMusterisiniIcerdigiDogrulanir(String expectedClientName) {
-        waitFor(3);
         for (WebElement w : clientsPage.musteriIsimListesi) {
             Assert.assertEquals(expectedClientName, w.getText());
         }
@@ -58,7 +56,6 @@ public class ClientsStepDefinitions {
 
     @Then("Listelenen verilerin {string} musterisinin BSNsini icerdigi dogrulanir")
     public void listelenenVerilerinMusterisininBsnsiniIcerdigiDogrulanir(String expectedClientBSN) {
-        waitFor(3);
         for (WebElement w : clientsPage.musteriIsimListesi) {
             Assert.assertEquals(expectedClientBSN, w.getText());
         }
@@ -66,7 +63,6 @@ public class ClientsStepDefinitions {
 
     @Then("Listelenen verilerin {string} musterisinin telefon numarasini icerdigi dogrulanir")
     public void listelenenVerilerinMusterisininTelefonNumarasiniIcerdigiDogrulanir(String expectedClienPhoneNumber) {
-        waitFor(3);
         for (WebElement w : clientsPage.musteriIsimListesi) {
             Assert.assertEquals(expectedClienPhoneNumber, w.getText());
         }
@@ -74,7 +70,6 @@ public class ClientsStepDefinitions {
 
     @Then("Listelenen verilerin {string} musterisinin ulkesini icerdigi dogrulanir")
     public void listelenenVerilerinMusterisininUlkesiniIcerdigiDogrulanir(String expectedClientCountry) {
-        waitFor(3);
         for (WebElement w : clientsPage.musteriIsimListesi) {
             Assert.assertEquals(expectedClientCountry, w.getText());
         }
@@ -82,7 +77,6 @@ public class ClientsStepDefinitions {
 
     @Then("Listelenen verilerin {string} musterisinin ismini icermedigi dogrulanir")
     public void listelenenVerilerinMusterisininIsminiIcermedigiDogrulanir(String expectedClientName) {
-        waitFor(3);
         for (WebElement w : clientsPage.musteriIsimListesi) {
             Assert.assertFalse(w.getText().contains(expectedClientName));
         }
@@ -163,15 +157,8 @@ public class ClientsStepDefinitions {
         waitFor(3);
     }
 
-    public static void main(String[] args) {
-        Faker faker = new Faker();
-        System.out.println(faker.phoneNumber().cellPhone());
-        System.out.println(faker.phoneNumber().phoneNumber());
-    }
-
     @And("Yeni kayit olusturma sayfasindaki Save Changes butonuna tiklanir")
     public void yeniKayitOlusturSayfasindakiSaveChangesButonunaTiklanir() {
-        waitFor(3);
         clientsPage.saveChangesButton.click();
     }
 
@@ -225,9 +212,9 @@ public class ClientsStepDefinitions {
     @And("New Client Expire Date girilir")
     public void newClientExpireDateGirilir() {
         clientsPage.expireDate.sendKeys(clientExpireDate);
-        waitFor(1);
+        waitFor(3);
         Driver.getDriver().findElement(By.xpath("//html")).click();
-        waitFor(1);
+        waitFor(3);
     }
 
     @Then("{string} Text boxinin altinda hata mesajinin gorundugu dogrulanir")
@@ -273,10 +260,12 @@ public class ClientsStepDefinitions {
     public void textBoxindakiVeriSilinirYeniVeriEklenir(String textBox, String newData) {
         switch (textBox) {
             case "name":
+                newData = faker.name().name();
                 clientsPage.clientNameTextBox.clear();
                 clientsPage.clientNameTextBox.sendKeys(newData);
                 break;
             case "bsn":
+                newData = faker.number().digits(15);
                 clientsPage.boxSerialNumber.clear();
                 clientsPage.boxSerialNumber.sendKeys(newData);
                 break;

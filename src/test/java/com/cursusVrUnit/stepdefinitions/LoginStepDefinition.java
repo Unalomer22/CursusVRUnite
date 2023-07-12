@@ -10,6 +10,8 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import org.junit.Assert;
 
+import static com.cursusVrUnit.utilities.BrowserUtils.waitFor;
+
 public class LoginStepDefinition {
 
     BasePage basePage = new BasePage();

@@ -1,5 +1,6 @@
 package com.cursusVrUnit.stepdefinitions;
 
+import com.cursusVrUnit.pages.HeadsetsPage;
 import com.cursusVrUnit.pages.VideosPage;
 import com.cursusVrUnit.utilities.BrowserUtils;
 import com.cursusVrUnit.utilities.Driver;
@@ -19,6 +20,7 @@ public class VideosStepDefinitions {
 
     String videoTitle = faker.funnyName().name();
 
+    HeadsetsPage headsetsPage = new HeadsetsPage();
     @And("Videos tabindaki arama kutusuna {string} musterisinin bilgisi yazilir")
     public void videosTabindakiAramaKutusunaMusterisininBilgisiYazilir(String arananVideoTitlei) {
         videosPage.searchTextBox.sendKeys(arananVideoTitlei);
@@ -80,14 +82,17 @@ public class VideosStepDefinitions {
     @And("Clients drop downundaki mevcut client silinir")
     public void clientsDropDownundakiMevcutClientSilinir() {
         waitFor(3);
-        BrowserUtils.waitForClickablility(videosPage.clientDeleteIcon, 10);
         videosPage.clientDeleteIcon.click();
     }
 
     @Then("Ilgili kaydin clientinin {string} oldugu dogrulanir")
     public void ilgiliVideonunClientininOlduguDogrulanir(String expectedMewVideosClient) {
         waitFor(3);
-        Assert.assertEquals(expectedMewVideosClient, videosPage.videonunClienti.getText());
+        try{
+            Assert.assertEquals(expectedMewVideosClient, videosPage.videonunClienti.getText());
+        }catch (Exception e){
+            Assert.assertEquals(expectedMewVideosClient, headsetsPage.headsetinClienti.getText());
+        }
     }
 
     String expectedVideoDeletedTitle;

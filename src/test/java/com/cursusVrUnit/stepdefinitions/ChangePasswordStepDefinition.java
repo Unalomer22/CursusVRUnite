@@ -22,13 +22,11 @@ public class ChangePasswordStepDefinition {
 
     @And("Old Password text boxina {string} sifresi yazilir")
     public void oldPasswordTextBoxinaSifresiYazilir(String oldPassword) {
-        BrowserUtils.waitFor(3);
         passwordPage.oldPasswordTextBox.sendKeys(ConfigurationReader.getProperty(oldPassword));
     }
 
     @And("New Password text boxina sifresi yazilir")
     public void newPasswordTextBoxinaSifresiYazilir() {
-        BrowserUtils.waitFor(3);
         System.out.println(password);
         passwordPage.newPasswordTextBox.sendKeys(password);
     }
@@ -42,7 +40,6 @@ public class ChangePasswordStepDefinition {
 
     @And("Save butonuna tiklanir")
     public void saveButonunaTiklanir() {
-        BrowserUtils.waitFor(3);
         passwordPage.saveButton.click();
         BrowserUtils.waitFor(3);
         sifreGuncellemeMesaji = passwordPage.sifreGuncellemeMesajiList.isEmpty();

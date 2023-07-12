@@ -24,4 +24,7 @@ public class HeadsetsPage extends BasePage {
     @FindBy(xpath = "//span[@style='color:red;']")
     public WebElement serialNumberErrorMessage;
 
+    @FindBy(xpath = "//div[@class='prompt srch_explore ui dropdown cntry152 selection']")
+    public WebElement headsetinClienti;
+
 }

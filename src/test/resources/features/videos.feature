@@ -96,11 +96,11 @@ Feature: Videos Functionality
     Then Ilgili kaydin clientinin "Musteri09" oldugu dogrulanir
 
   Scenario: Mevcut kayit silinebilir. Silmeden önce kullanicidan onay istenir.(Videos)
-    And 3.ci videonun delete butonuna basilir
+    And 2.ci videonun delete butonuna basilir
     And Yes, delete it! butonuna tiklanir
     Then Ilgili kaydin listeden silindigi gozlemlenir
 
   Scenario: Mevcut kayit silinebilir. Silmeden önce kullanicidan onay istenir. Kullanici onay vermezse kayit silinme islemi gerceklesmez(Videos)
-    And 3.ci videonun delete butonuna basilir
+    And 4.ci videonun delete butonuna basilir
     And Cancel butonuna tiklanir
     Then Ilgili kaydin listeden silinmedigi gozlemlenir

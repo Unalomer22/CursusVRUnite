@@ -11,6 +11,7 @@ import org.junit.runner.RunWith;
         glue = "com/cursusVrUnit/stepdefinitions",
         //dryRun = true, //oldugunda sadece eksik senaryoyu calistiriyor.
         dryRun = false// oldugunda bütün senaryoyu calistiriyor. Default
+        ,tags = "@wip2"
 // Before version 4 --> {"@Smoke" and "@Wip"} ---> and
 // Before version 5 --> "@Smoke ,@Wip" ---> or
 // Before version 5 --> {"@Login" , "~@Wip"} ---> and not

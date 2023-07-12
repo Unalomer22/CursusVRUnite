@@ -36,7 +36,6 @@ public class HeadsetStepDefinitions {
 
     @And("Is Active check box'ina tiklanir")
     public void isActiveCheckBoxInaTiklanir() {
-        waitFor(3);
         Actions act = new Actions(Driver.getDriver());
         act.moveToElement(headsetsPage.isActiveCheckBox).click().perform();
     }
